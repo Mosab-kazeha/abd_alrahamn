@@ -1,112 +1,48 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:intro_to_quis/widget/on_bording_page.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  MyApp({super.key});
+  PageController controller = PageController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // backgroundColor: Colors.purpleAccent.shade700,
-        body: Padding(
-          padding: const EdgeInsets.only(
-            top: 60,
-            right: 21,
-            left: 21,
-            bottom: 91,
-          ),
-          child: Column(
-            children: [
-              Align(
-                alignment: AlignmentGeometry.centerRight,
-                child: Text(
-                  "Skip",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    color: Color.fromRGBO(139, 168, 181, 1),
-                    fontSize: 17,
-                  ),
-                ),
-              ),
-              Container(
-                margin: EdgeInsets.symmetric(vertical: 68, horizontal: 50),
-                child: Image(
-                  image: FileImage(File("C:/Users/mosab/Desktop/cuate.png")),
-                ),
-              ),
-              Text(
-                "Stay Organized",
-                style: TextStyle(fontWeight: FontWeight.w500, fontSize: 24),
-              ),
-              SizedBox(height: 52),
-              Text(
-                "Group your tasks and keep\n them organized",
-                style: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 20,
-                  color: Color.fromRGBO(153, 153, 153, 1),
-                  // Color.fromARGB(255, 153, 153, 153),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(28),
-                child: Row(
-                  mainAxisAlignment: .center,
-                  children: [
-                    Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFD9D9D9),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 10,
-                      height: 10,
-                      margin: EdgeInsets.symmetric(horizontal: 8),
-                      decoration: BoxDecoration(
-                        color: Color(0xFF8BA8B5),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                    Container(
-                      width: 10,
-                      height: 10,
-                      decoration: BoxDecoration(
-                        color: Color(0xFFD9D9D9),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Container(
-                width: 317,
-                height: 54,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Color(0xFF8BA8B5),
-                ),
-                child: Text(
-                  "Next",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w400,
-                    fontSize: 18,
-                    color: const Color(0xFFFFFFFF),
-                  ),
-                ),
-              ),
-            ],
-          ),
+        body: PageView(
+          controller: controller,
+          scrollDirection: Axis.horizontal,
+          children: [
+            OnBordingPage(
+              controller: controller,
+              buttonText: 'Next',
+              description:
+                  'Write your tasks in a list and check them when done!',
+              isLastPage: false,
+              title: 'Write Lists',
+            ),
+            OnBordingPage(
+              controller: controller,
+              buttonText: 'Next',
+              description: 'Group your tasks and keep them organized',
+              isLastPage: false,
+              title: 'Stay Organized',
+            ),
+            OnBordingPage(
+              controller: controller,
+              buttonText: 'Let’s Start',
+              description: 'See how much you have done from your tasks',
+              isLastPage: true,
+              title: 'Check Progress',
+            ),
+          ],
         ),
       ),
     );
