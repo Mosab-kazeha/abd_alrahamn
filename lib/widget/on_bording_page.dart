@@ -12,12 +12,16 @@ class OnBordingPage extends StatelessWidget {
     required this.isLastPage,
     required this.title,
     required this.controller,
+    required this.indexPage,
+    required this.conutOfPages,
   });
   bool isLastPage;
   String title;
   String description;
   String buttonText;
   PageController controller;
+  int indexPage;
+  int conutOfPages;
 
   @override
   Widget build(BuildContext context) {
@@ -60,40 +64,27 @@ class OnBordingPage extends StatelessWidget {
               fontWeight: FontWeight.w300,
               fontSize: 20,
               color: Color.fromRGBO(153, 153, 153, 1),
-              // Color.fromARGB(255, 153, 153, 153),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.all(28),
-            child: Row(
-              mainAxisAlignment: .center,
-              children: [
-                Container(
+          SizedBox(
+            width: 1000,
+            height: 100,
+            child: ListView.builder(
+              scrollDirection: Axis.horizontal,
+              itemCount: conutOfPages,
+              itemBuilder: (context, indexCircal) {
+                return Container(
                   width: 10,
                   height: 10,
+                  margin: EdgeInsets.all(10),
                   decoration: BoxDecoration(
-                    color: Color(0xFFD9D9D9),
+                    color: indexPage == indexCircal
+                        ? Color(0xFF8BA8B5)
+                        : Color(0xFFD9D9D9),
                     shape: BoxShape.circle,
                   ),
-                ),
-                Container(
-                  width: 10,
-                  height: 10,
-                  margin: EdgeInsets.symmetric(horizontal: 8),
-                  decoration: BoxDecoration(
-                    color: Color(0xFF8BA8B5),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-                Container(
-                  width: 10,
-                  height: 10,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFD9D9D9),
-                    shape: BoxShape.circle,
-                  ),
-                ),
-              ],
+                );
+              },
             ),
           ),
           TodoButton(
@@ -106,7 +97,6 @@ class OnBordingPage extends StatelessWidget {
               }
             },
             buttonText: buttonText,
-            controller: controller,
           ),
         ],
       ),

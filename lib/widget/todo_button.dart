@@ -5,10 +5,8 @@ class TodoButton extends StatelessWidget {
   TodoButton({
     super.key,
     required this.buttonText,
-    required this.controller,
     this.onTap,
   });
-  PageController controller;
   String buttonText;
   Function()? onTap;
 
